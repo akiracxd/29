@@ -1,3 +1,4 @@
+/* Общие стили */
 body {
     font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #2c3e50, #4ca1af);
@@ -8,8 +9,11 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow: hidden; /* Убирает прокрутку страницы */
+    height: 100%; /* Устанавливаем высоту тела страницы, чтобы оно не выходило за пределы экрана */
 }
 
+/* Шапка */
 header {
     background: rgba(0, 0, 0, 0.8);
     padding: 15px 0;
@@ -43,29 +47,35 @@ nav ul li a:hover {
     color: #f8b400;
 }
 
+/* Основной контент */
 main {
-    margin-top: 100px;
+    margin-top: 100px; /* Чтобы шапка не накрывала контент */
     padding: 20px;
     flex-grow: 1;
+    height: calc(100vh - 100px); /* Высота контента, чтобы он не выходил за пределы экрана */
+    overflow-y: auto; /* Позволяет прокручивать контент внутри блока, если он не помещается */
 }
 
+/* Блоки контента */
 .welcome, .about, .movies, .contacts, .profile {
     padding: 30px;
     background: rgba(255, 255, 255, 0.15);
     border-radius: 10px;
     display: inline-block;
-    width: 80%;
-    max-width: 800px;
+    width: 90%; /* Уменьшаем ширину блоков */
+    max-width: 750px; /* Максимальная ширина */
     text-align: left;
     margin: auto;
 }
 
+/* Стили для списка */
 .about ul {
     list-style-type: square;
     padding-left: 20px;
     text-align: left;
 }
 
+/* Кнопка */
 .btn {
     display: inline-block;
     padding: 10px 20px;
@@ -83,17 +93,20 @@ main {
     transform: scale(1.1);
 }
 
+/* Заголовки */
 h2 {
     font-size: 28px;
     color: #ffcc00;
     animation: fadeIn 1s ease-in-out;
 }
 
+/* Анимация */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
 }
 
+/* Футер */
 footer {
     background: rgba(0, 0, 0, 0.8);
     padding: 20px;
@@ -101,4 +114,56 @@ footer {
     text-align: center;
     width: 100%;
     position: relative;
+    bottom: 0;
+    left: 0;
+}
+
+/* Ссылки переключения */
+.switch-link {
+    color: #f8b400;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.switch-link:hover {
+    color: #ffcc00;
+    transform: scale(1.1);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .welcome, .about, .movies, .contacts, .profile {
+        width: 95%; /* Увеличиваем ширину блоков на мобильных */
+    }
+
+    .btn {
+        padding: 12px 25px;
+        font-size: 16px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 18px;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+        padding: 12px 25px;
+    }
+
+    .welcome, .about, .movies, .contacts, .profile {
+        width: 100%; /* На маленьких экранах блоки растягиваются на всю ширину */
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
 }

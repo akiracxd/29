@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизация</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Авторизация</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="catalog.html">Каталог</a></li>
+                <li><a href="about.html">О нас</a></li>
+                <li><a href="contacts.html">Контакты</a></li>
+                <li><a href="profile.html">Личный кабинет</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="auth-container">
+            <div class="form-box" id="register-box">
+                <h2>Регистрация</h2>
+                <form id="register-form">
+                    <label for="reg-login">Логин:</label>
+                    <input type="text" id="reg-login" required>
+                    
+                    <label for="reg-password">Пароль:</label>
+                    <input type="password" id="reg-password" required>
+                    
+                    <button type="submit" class="btn">Зарегистрироваться</button>
+                </form>
+                <p class="switch-form">Есть аккаунт? <span id="show-login" class="switch-link">Войти</span></p>
+            </div>
+            
+            <div class="form-box" id="login-box" style="display: none;">
+                <h2>Вход</h2>
+                <form id="login-form">
+                    <label for="login">Логин:</label>
+                    <input type="text" id="login" required>
+                    
+                    <label for="password">Пароль:</label>
+                    <input type="password" id="password" required>
+                    
+                    <button type="submit" class="btn">Войти</button>
+                </form>
+                <p class="switch-form">Нет аккаунта? <span id="show-register" class="switch-link">Регистрация</span></p>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 Прокат видеофильмов, Челябинск</p>
+        <p>Телефон: +7 (351) 123-45-67 | Email: info@videorental.ru</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.getElementById("show-login").addEventListener("click", () => {
+            document.getElementById("register-box").style.display = "none";
+            document.getElementById("login-box").style.display = "block";
+        });
+
+        document.getElementById("show-register").addEventListener("click", () => {
+            document.getElementById("login-box").style.display = "none";
+            document.getElementById("register-box").style.display = "block";
+        });
+
+        document.getElementById("register-form").addEventListener("submit", (e) => {
+            e.preventDefault();
+            const login = document.getElementById("reg-login").value;
+            const password = document.getElementById("reg-password").value;
+
+            const users = JSON.parse(localStorage.getItem("users")) || [];
+            if (users.some(user => user.login === login)) {
+                alert("Пользователь с таким логином уже существует.");
+                return;
+            }
+
+            users.push({ login, password });
+            localStorage.setItem("users", JSON.stringify(users));
+
+            alert("Регистрация прошла успешно!");
+            document.getElementById("register-box").style.display = "none";
+            document.getElementById("login-box").style.display = "block";
+        });
+
+        document.getElementById("login-form").addEventListener("submit", (e) => {
+            e.preventDefault();
+            const login = document.getElementById("login").value;
+            const password = document.getElementById("password").value;
+
+            const users = JSON.parse(localStorage.getItem("users")) || [];
+            const user = users.find(user => user.login === login && user.password === password);
+
+            if (user) {
+                localStorage.setItem("loggedIn", login);
+                alert("Вы успешно вошли!");
+                window.location.href = "profile.html";
+            } else {
+                alert("Неверный логин или пароль.");
+            }
+        });
+    </script>
+</body>
+</html>
