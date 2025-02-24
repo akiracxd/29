@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Личный кабинет</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
     <header>
@@ -19,23 +20,15 @@
             </ul>
         </nav>
     </header>
-    
     <main>
         <section class="profile">
             <h2>Ваш профиль</h2>
-            <p>Имя: Иван Иванов</p>
-            <p>Email: ivan@example.com</p>
-            <p>Количество взятых фильмов: 3</p>
+            <p id="user-info">Вы не вошли в систему</p>
             <h2>История заказов</h2>
-            <ul>
-                <li>Фильм 1 - 10.02.2025</li>
-                <li>Фильм 2 - 15.02.2025</li>
-                <li>Фильм 3 - 20.02.2025</li>
-            </ul>
-            <a href="#" class="btn">Редактировать профиль</a>
+            <ul id="order-history"></ul>
+            <a href="auth.html" class="btn">Войти или зарегистрироваться</a>
         </section>
     </main>
-    
     <footer>
         <p>&copy; 2025 Прокат видеофильмов, Челябинск</p>
         <p>Телефон: +7 (351) 123-45-67 | Email: info@videorental.ru</p>
